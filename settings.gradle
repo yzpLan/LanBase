@@ -14,8 +14,16 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        // 【核心】把阿里云镜像放在最前面！
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        // 这是一个 Github 库，有时阿里云也没同步到，保留 Jitpack
+        maven { url 'https://jitpack.io' }
+        // 官方源放最后兜底
         mavenCentral()
         google()
+        jcenter()
     }
 }
 
