@@ -369,7 +369,7 @@ View 销毁后不会执行，防止内存泄漏或 Crash。
 - **无需自己在布局写 Toolbar，直接在 XML 中使用：**
 
   ```xml
-  <com.lan.lib_base.view.CommonTitleBar
+  <com.yzplan.lanbase.view.CommonTitleBar
     android:id="@+id/title_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -458,7 +458,7 @@ public void getOrderListFailure(String msg) {
     - `app:limit_days`: 范围限制。设置可选的最早日期（距离今天的偏移天数，如 180）。
 
   ```xml
-  <com.lan.lib_base.view.DatePickerView
+  <com.yzplan.lanbase.view.DatePickerView
     android:id="@+id/datePicker"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -531,7 +531,7 @@ public void getOrderListFailure(String msg) {
 ### 🔧五、工具类速查表
 
 #### 💡模块简介
-`lib_base` 提供了丰富的工具类，统一位于 `com.lan.lib_base.utils` 包下。
+`lib_base` 提供了丰富的工具类，统一位于 `com.yzplan.lanbase.utils` 包下。
 
 | 工具类名                | 功能描述       | 常用方法示例                                                        |
 |:--------------------|:-----------|:--------------------------------------------------------------|

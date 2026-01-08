@@ -33,8 +33,7 @@ import com.yzplan.lanbase.utils.view.ToastUtils;
  * @param <VB> 子类布局对应的 ViewBinding 类型
  * @param <P>  Presenter 类型，若无业务逻辑可传 BasePresenter
  */
-public abstract class BaseActivity<VB extends ViewBinding, P extends BasePresenter>
-        extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<VB extends ViewBinding, P extends BasePresenter> extends AppCompatActivity implements IBaseView {
 
     protected VB binding;
     protected LibActivityBaseBinding baseBinding;
