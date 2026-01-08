@@ -1,6 +1,8 @@
-package com.yzplan.lanbase;
+package com.yzplan.lanbase.app;
 
 import android.app.Application;
+
+import com.yzplan.lanbase.BaseApp;
 
 
 public class App extends Application {

@@ -1,4 +1,4 @@
-package com.yzplan.lanbase.http;
+package com.yzplan.lanbase.app.http;
 
 import com.google.gson.JsonObject;
 import com.yzplan.lanbase.http.api.BaseApi;

@@ -1,4 +1,4 @@
-package com.yzplan.lanbase.ui;
+package com.yzplan.lanbase.app.ui;
 
 
 import com.yzplan.lanbase.base.IBaseView;

@@ -1,8 +1,8 @@
-package com.yzplan.lanbase.ui;
+package com.yzplan.lanbase.app.ui;
 
 import com.google.gson.JsonObject;
 import com.yzplan.lanbase.base.BasePresenter;
-import com.yzplan.lanbase.http.WanApi;
+import com.yzplan.lanbase.app.http.WanApi;
 import com.yzplan.lanbase.utils.data.JsonUtil;
 
 import java.util.HashMap;

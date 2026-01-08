@@ -1,10 +1,10 @@
-package com.yzplan.lanbase.ui;
+package com.yzplan.lanbase.app.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.yzplan.lanbase.app.databinding.ActivityMainBinding;
 import com.yzplan.lanbase.base.BaseActivity;
-import com.yzplan.lanbase.databinding.ActivityMainBinding;
 import com.yzplan.lanbase.manager.AlertDialogHelper;
 import com.yzplan.lanbase.manager.SingleClickListener;
 import com.yzplan.lanbase.utils.permission.PermissionConstants;
