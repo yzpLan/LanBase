@@ -1,0 +1,25 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 只要你推送以 v 开头的 tag，例如 v1.0.5，就会触发
+
+permissions:
+  contents: write # 必须赋予写入权限，否则无法自动创建 Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ github.ref_name }} # 标题自动叫 v1.0.5
+          body: "自动发布的 AAR 版本 ${{ github.ref_name }}" # 内容
+          generate_release_notes: true # 自动根据 commit 记录生成更新日志
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #
