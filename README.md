@@ -41,7 +41,8 @@ android {
 
 dependencies {
     // ⚠️引入基础库
-    implementation project(':lib_base')
+//    implementation project(':lib_base') //(module方式)
+    implementation 'com.github.yzpLan:LanBase:1.0.4' //依赖方式
 }
 ```
 由于本库引用了部分较老的第三方 UI 库，为了确保依赖树能够正确转换并避免 Duplicate class 冲突，
