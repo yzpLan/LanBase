@@ -7,9 +7,13 @@ import com.yzplan.lanbase.app.databinding.ActivityMainBinding;
 import com.yzplan.lanbase.base.BaseActivity;
 import com.yzplan.lanbase.manager.AlertDialogHelper;
 import com.yzplan.lanbase.manager.SingleClickListener;
+import com.yzplan.lanbase.utils.data.TimeUtils;
+import com.yzplan.lanbase.utils.log.L;
 import com.yzplan.lanbase.utils.permission.PermissionConstants;
 import com.yzplan.lanbase.utils.permission.PermissionUtils;
+import com.yzplan.lanbase.view.DatePickerView;
 
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, ActivityMainPresenter> implements ActivityMainContract.View {
@@ -60,6 +64,14 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, ActivityMain
             @Override
             public void onSingleClick(View v) {
                 toast("4");
+            }
+        });
+
+        binding.datePicker.setOnDateChangeListener(new DatePickerView.OnDateChangeListener() {
+            @Override
+            public void onDateChanged(Date start, Date end) {
+                L.i(TAG, "start:" + TimeUtils.dateToString(start, TimeUtils.FORMAT_FULL_SN));
+                L.i(TAG, "end:" + TimeUtils.dateToString(end, TimeUtils.FORMAT_FULL_SN));
             }
         });
 
