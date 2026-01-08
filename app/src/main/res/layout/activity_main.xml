@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/dp16">
+
+    <Button
+        android:id="@+id/btn_fun1"
+        style="@style/BtMainRed"
+        android:layout_width="match_parent"
+        android:text="fun1"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_fun2"
+        style="@style/BtMainRed"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp16"
+        android:text="fun2"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_fun3"
+        style="@style/BtMainRed"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp16"
+        android:text="fun3" />
+
+    <Button
+        android:id="@+id/btn_fun4"
+        style="@style/BtMainRed"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp16"
+        android:text="fun4" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        style="@style/TextBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp16" />
+
+
+</LinearLayout>

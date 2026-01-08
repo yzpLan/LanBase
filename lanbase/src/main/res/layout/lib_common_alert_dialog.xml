@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/lib_shape_white_radius6"
+    android:minWidth="@dimen/dp330"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_title"
+        style="@style/TextTitle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp20"
+        tools:text="提示" />
+
+    <TextView
+        android:id="@+id/txt_content"
+        style="@style/TextBody"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="@dimen/dp12"
+        android:layout_marginTop="@dimen/dp12"
+        tools:text="内容？" />
+
+    <TextView
+        android:id="@+id/txt_tip"
+        style="@style/TextSecondary"
+        android:layout_marginHorizontal="@dimen/dp12"
+        android:layout_marginTop="@dimen/dp12"
+        android:textColor="@color/lib_main_red"
+        android:visibility="gone"
+        tools:text="提示" />
+
+    <View
+        style="@style/LineHorizontal"
+        android:layout_marginTop="@dimen/dp20" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp50"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/lib_selector_white_bottom_left_radius6"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/text_main"
+            android:textSize="@dimen/sp16"
+            tools:text="取消" />
+
+        <View
+            android:id="@+id/iv_line"
+            style="@style/LineVertical" />
+
+        <TextView
+            android:id="@+id/txt_sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/lib_selector_white_bottom_right_radius6"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/lib_main_red"
+            android:textSize="@dimen/sp16"
+            tools:ignore="TextContrastCheck"
+            tools:text="确定" />
+    </LinearLayout>
+</LinearLayout>

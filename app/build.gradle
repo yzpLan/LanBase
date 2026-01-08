@@ -1,0 +1,91 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.yzplan.lanbase'
+    compileSdk {
+        version = release(36)
+    }
+
+    defaultConfig {
+        applicationId "com.yzplan.lanbase"
+        minSdk 21
+        targetSdk 28
+        versionCode 101
+        versionName "1.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('LanBase.jks')
+            storePassword 'yzp0625'
+            keyAlias 'lan'
+            keyPassword 'yzp0625'
+        }
+    }
+
+    buildTypes {
+        release {
+            // 开启代码混淆
+            minifyEnabled true
+            // 开启资源缩减（移除未使用的资源文件）
+            shrinkResources true
+            //签名
+            signingConfig signingConfigs.release
+            // 默认混淆规则文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    def releaseTime = {
+        return new Date().format("yyyyMMdd_HHmm", TimeZone.getTimeZone("GMT+08:00"))
+    }
+
+    // 打包名称
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            //  获取当前是 release 还是 debug
+            def buildType = variant.buildType.name
+            // 获取版本号和版本名
+            def versionName = variant.versionName
+            def versionCode = variant.versionCode
+            // 自定义文件名格式：项目名_v版本名_代码_时间_构建类型.apk
+            if (buildType == "release") {
+                outputFileName = "LibBase_v${versionName}_${versionCode}_${releaseTime()}_release.apk"
+            } else {
+                outputFileName = "LibBase_v${versionName}_${versionCode}_${releaseTime()}_debug.apk"
+            }
+        }
+    }
+
+    // 关闭 lint
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+    // 开启ViewBinding
+    buildFeatures {
+        viewBinding true
+        buildConfig = true
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+    // 引入基础库
+    implementation project(':lanbase')
+}

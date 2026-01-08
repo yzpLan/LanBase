@@ -1,0 +1,88 @@
+plugins {
+    id 'com.android.library'
+    //发布aar插件
+    id 'maven-publish'
+}
+
+android {
+    namespace 'com.yzplan.lanbase'
+    compileSdk 36
+
+    defaultConfig {
+        minSdk 21
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
+
+    resourcePrefix "lib_"
+
+    //声明发布变体并自动开启源码打包
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+}
+
+afterEvaluate {
+    //配置 Maven 发布任务
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.yzpLan'
+                artifactId = 'lanbase'
+                version = '1.0.0'
+            }
+        }
+    }
+}
+
+dependencies {
+    // Android 基础
+    api 'androidx.appcompat:appcompat:1.4.2'
+    api 'com.google.android.material:material:1.6.1'
+    api 'androidx.constraintlayout:constraintlayout:2.1.4'
+    api 'androidx.recyclerview:recyclerview:1.2.1'
+
+    // 网络请求核心 (Retrofit + Gson + RxJava)
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.21'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'com.google.code.gson:gson:2.9.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+    api 'com.squareup.okio:okio:3.4.0'
+
+    // 业务工具
+    api 'com.guolindev.permissionx:permissionx:1.6.4'
+    api 'com.orhanobut:logger:2.2.0'
+    api 'com.github.bumptech.glide:glide:4.12.0'
+    api 'com.google.zxing:core:3.5.2'
+
+    // 智能刷新框架
+    api 'io.github.scwang90:refresh-layout-kernel:2.1.0'
+    api 'io.github.scwang90:refresh-header-classics:2.1.0'
+    api 'io.github.scwang90:refresh-footer-classics:2.1.0'
+
+    // 时间/滚轮选择器
+    api 'com.contrarywind:Android-PickerView:4.1.9'
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 纯白色 -->
+    <color name="white" tools:ignore="ResourceName">#FFFFFF</color>
+    <!-- 纯黑色 -->
+    <color name="black" tools:ignore="ResourceName">#000000</color>
+    <!-- 标准灰（主要用于：通用灰色占位、中性色块） -->
+    <color name="gray" tools:ignore="ResourceName">#888888</color>
+    <!-- 浅灰色（主要用于：禁用背景、未选中状态、边框） -->
+    <color name="light_gray" tools:ignore="ResourceName">#CCCCCC</color>
+    <!-- 深灰色（主要用于：深色标题、强调灰、夜间模式背景） -->
+    <color name="dark_gray" tools:ignore="ResourceName">#444444</color>
+    <!-- 标准红（主要用于：测试红色、极强警示、促销热点） -->
+    <color name="red" tools:ignore="ResourceName">#FF0000</color>
+    <!-- 标准橙（主要用于：测试橙色、活力元素、警告标识） -->
+    <color name="orange" tools:ignore="ResourceName">#FFA500</color>
+    <!-- 标准黄（主要用于：测试黄色、高亮醒目、引导提示） -->
+    <color name="yellow" tools:ignore="ResourceName">#FFFF00</color>
+    <!-- 标准绿（主要用于：测试绿色、极亮成功态） -->
+    <color name="green" tools:ignore="ResourceName">#00FF00</color>
+    <!-- 标准蓝（主要用于：测试蓝色、科技元素、默认链接） -->
+    <color name="blue" tools:ignore="ResourceName">#0000FF</color>
+    <!-- 标准紫（主要用于：测试紫色、活动氛围、VIP标识） -->
+    <color name="purple" tools:ignore="ResourceName">#800080</color>
+    <!-- 标准粉（主要用于：测试粉色、女性化元素、爱心图标） -->
+    <color name="pink" tools:ignore="ResourceName">#FFC0CB</color>
+    <!-- 标准青（主要用于：测试青色、冷色调点缀、清新风格） -->
+    <color name="cyan" tools:ignore="ResourceName">#00FFFF</color>
+    <!-- 品红色（主要用于：测试洋红、特殊高亮） -->
+    <color name="magenta" tools:ignore="ResourceName">#FF00FF</color>
+    <!-- 全透明（主要用于：隐藏布局背景、占位符、去除默认阴影） -->
+    <color name="transparent" tools:ignore="ResourceName">#00000000</color>
+    <!-- 半透明黑（主要用于：通用遮罩、状态栏背景、悬浮层底色） -->
+    <color name="translucent_black" tools:ignore="ResourceName">#66000000</color>
+
+    <!--    一级文本（主要用于：标题、正文、重要数据）-->
+    <color name="text_main" tools:ignore="ResourceName">#333333</color>
+    <!--    二级文本（主要用于：副标题、次要内容、列表描述）-->
+    <color name="text_secondary" tools:ignore="ResourceName">#666666</color>
+    <!--   三级文本（主要用于：输入框提示语 Hint、辅助说明、时间戳） -->
+    <color name="text_hint" tools:ignore="ResourceName">#999999</color>
+    <!--   失效文本（主要用于：不可点击的按钮文字、置灰状态） -->
+    <color name="text_disable" tools:ignore="ResourceName">#C0C4CC</color>
+    <!--   白色背景（主要用于：卡片背景、弹窗背景、输入框内部） -->
+    <color name="bg_white" tools:ignore="ResourceName">#FFFFFF</color>
+    <!--    页面底色（主要用于：Activity 整体背景，与卡片形成对比）-->
+    <color name="bg_page" tools:ignore="ResourceName">#F5F5F5</color>
+    <!--    分割线色（主要用于：列表分隔线、边框线）-->
+    <color name="line_color" tools:ignore="ResourceName">#E0E0E0</color>
+    <!--    遮罩层色（主要用于：弹窗背后的半透明黑色阴影）-->
+    <color name="mask_color" tools:ignore="ResourceName">#80000000</color>
+    <!--   按压背景色（主要用于：列表项或按钮被点击时的变暗效果） -->
+    <color name="bg_pressed" tools:ignore="ResourceName">#F0F0F0</color>
+    <!--   成功状态色（主要用于：支付成功、操作完成、状态开启） -->
+    <color name="state_success" tools:ignore="ResourceName">#07C160</color>
+    <!--   错误状态色（主要用于：删除按钮、报错提示、金额支出） -->
+    <color name="state_error" tools:ignore="ResourceName">#FF4D4F</color>
+    <!--   警告状态色（主要用于：待付款、星级评分、重要通知） -->
+    <color name="state_warning" tools:ignore="ResourceName">#FAAD14</color>
+    <!--    信息/链接色（主要用于：超链接文字、确定按钮、选中状态）-->
+    <color name="state_info" tools:ignore="ResourceName">#1890FF</color>
+
+    <!--    项目个性颜色-->
+    <color name="lib_main_red">#E3493D</color>
+    <color name="lib_main_red_light">#CCE3493D</color>
+    <color name="lib_main_red_little">#1AE3493D</color>
+
+</resources>
