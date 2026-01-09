@@ -169,7 +169,7 @@ public class RecycleViewHelper<T> {
      * 3. 启动！(包含安全检查)
      * 必须在配置完 setLayout 和 setData 后调用
      */
-    public void start() {
+    public RecycleViewHelper<T> start() {
         if (adapter == null) {
             throw new RuntimeException("RecycleViewHelper 报错：请先调用 .setLayout() 设置布局！");
         }
@@ -177,6 +177,7 @@ public class RecycleViewHelper<T> {
             throw new RuntimeException("RecycleViewHelper 报错：请先调用 .setData() 设置加载逻辑！");
         }
         refreshLayout.autoRefresh(); // 触发自动刷新
+        return this;
     }
 
     /**
@@ -246,10 +247,6 @@ public class RecycleViewHelper<T> {
                 pageNo--; // 本次没有数据，页码回退，防止下次加载跳页
                 refreshLayout.finishLoadMoreWithNoMoreData(); // 显示"没有更多数据"
             }
-        }
-        // 智能判断：如果本次返回条数 < 页大小，说明后面没有数据了
-        if (size < pageSize) {
-            refreshLayout.finishLoadMoreWithNoMoreData();
         }
     }
 

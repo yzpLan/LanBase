@@ -1,4 +1,4 @@
-package com.yzplan.lanbase.app.http;
+package com.yzplan.lanbase.app.bean.base;
 
 
 import com.yzplan.lanbase.base.BaseResponse;

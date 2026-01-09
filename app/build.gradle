@@ -14,6 +14,12 @@ android {
         versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     signingConfigs {
@@ -86,4 +92,7 @@ dependencies {
     androidTestImplementation libs.espresso.core
     // 引入基础库
     implementation project(':lanbase')
+    // ARouter 路由编译器
+    implementation 'com.alibaba:arouter-api:1.5.2'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
 }
