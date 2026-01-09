@@ -1,20 +1,13 @@
 package com.yzplan.lanbase.app.bean.response;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 import java.util.List;
 
 public class ArticleListResponse implements Serializable {
-    @SerializedName("curPage")
     private int curPage;
-    @SerializedName("datas")
     private List<Article> datas;
-    @SerializedName("pageCount")
     private int pageCount;
-    @SerializedName("total")
     private int total;
-    @SerializedName("over")
     private boolean over;
 
     public int getCurPage() {

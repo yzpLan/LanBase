@@ -76,6 +76,7 @@
     <dimen name="dp48">48dp</dimen>
     <dimen name="dp49">49dp</dimen>
     <dimen name="dp50">50dp</dimen>
+    <dimen name="dp56">56dp</dimen>
     <dimen name="dp60">60dp</dimen>
     <dimen name="dp70">70dp</dimen>
     <dimen name="dp80">80dp</dimen>

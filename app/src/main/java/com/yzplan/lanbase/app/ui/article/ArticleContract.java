@@ -2,17 +2,25 @@ package com.yzplan.lanbase.app.ui.article;
 
 
 import com.yzplan.lanbase.app.bean.response.ArticleListResponse;
+import com.yzplan.lanbase.app.bean.response.BannerBean;
 import com.yzplan.lanbase.base.IBaseView;
+
+import java.util.List;
 
 public interface ArticleContract {
     interface View extends IBaseView {
         void getArticleListSuccess(ArticleListResponse articleListResponse);
 
         void getArticleListFail(String errorMsg);
+
+        void getBannerSuccess(List<BannerBean> data);
+
+        void getBannerFail(String errorMsg);
     }
 
     // 定义 presenter 接口
     interface IPresenter {
         void getArticleList(int pageNo, int pageSize);
+        void getBanner();
     }
 }

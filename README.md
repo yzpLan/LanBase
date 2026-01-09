@@ -505,6 +505,68 @@ public void getOrderListFailure(String msg) {
 
 #### 5. Loading框 (CommonLoadingDialog)
 - **如上BaseActivity介绍中提到的使用方法**
+- 
+#### 5. 设置条 (SettingItemView)
+SettingItemView 是一个高度可定制的列表项控件，专为个人中心、设置页面设计。支持图标、标题、右侧文字、箭头的全方位属性控制。
+* ##### 📘 SettingItemView 属性全量说明
+
+`SettingItemView` 支持通过 XML 属性高度定制化，涵盖了图标、标题、右侧文字、箭头及其间距的所有控制。
+
+| 属性名                          | 格式        | 描述          | 默认值     |
+|:-----------------------------|:----------|:------------|:--------|
+| `app:siv_icon`               | reference | 左侧图标资源      | 无       |
+| `app:siv_icon_size`          | dimension | 图标宽高尺寸      | 20dp    |
+| `app:siv_title`              | string    | 标题内容        | 无       |
+| `app:siv_title_size`         | dimension | 标题文字大小      | 16sp    |
+| `app:siv_title_color`        | color     | 标题文字颜色      | #333333 |
+| `app:siv_right_text`         | string    | 右侧描述文字内容    | 无       |
+| `app:siv_right_text_size`    | dimension | 右侧文字大小      | 14sp    |
+| `app:siv_right_text_color`   | color     | 右侧文字颜色      | #999999 |
+| `app:siv_arrow_size`         | dimension | 右侧箭头宽高尺寸    | 16dp    |
+| `app:siv_arrow_color`        | color     | 箭头着色 (Tint) | #CCCCCC |
+| `app:siv_arrow_margin_start` | dimension | 箭头与右侧文字的间距  | 8dp     |
+
+* ##### 💻 XML 使用示例
+
+```xml
+//全量属性示例
+<com.yzplan.lanbase.view.SettingItemView
+    android:id="@+id/siv_profile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:siv_icon="@drawable/ic_avatar"
+    app:siv_icon_size="45dp"
+    app:siv_title="修改头像"
+    app:siv_title_size="18sp"
+    app:siv_title_color="#222222"
+    app:siv_right_text="点击更换"
+    app:siv_right_text_size="14sp"
+    app:siv_right_text_color="#007AFF"
+    app:siv_arrow_size="20dp"
+    app:siv_arrow_color="#007AFF"
+    app:siv_arrow_margin_start="15dp" />
+    
+//简洁属性示例
+<com.yzplan.lanbase.view.SettingItemView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:siv_icon="@drawable/ic_score"
+    app:siv_title="我的积分"
+    app:siv_right_text="1784" />
+```
+* ##### 💻 Java 代码动态调用
+```java
+    binding.siv.setTitle("我的勋章")
+       .setTitleColor(Color.BLACK)
+       .setRightText("已获得3枚")
+       .setRightTextColor(Color.RED)
+       .setIcon(R.drawable.ic_medal)
+       .setIconSize(24)
+       .setArrowColor(Color.GRAY)
+       .setOnItemClickListener(v -> {
+        // 处理点击逻辑
+        });
+```
 
 ### 📚四、通用管理类
 
