@@ -1,5 +1,6 @@
 package com.yzplan.lanbase.app.ui.article;
 
+import android.annotation.SuppressLint;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class ArticleActivity extends AppBaseActivity<ActivityArticleBinding, Art
         presenter.getBanner();
     }
 
+    @SuppressLint("SetTextI18n")
     private void initRecycleView() {
         recycleViewHelper = new RecycleViewHelper<Article>(binding.listView)
                 .setPageConfig(0, 10)
@@ -60,7 +62,7 @@ public class ArticleActivity extends AppBaseActivity<ActivityArticleBinding, Art
                     TextView tv_date = holder.getView(R.id.tv_date);
                     TextView tv_chapter = holder.getView(R.id.tv_chapter);
                     // 设置标题 (处理可能存在的 HTML 转义字符)
-                    tv_title.setText(Html.fromHtml(item.getTitle(), Html.FROM_HTML_MODE_LEGACY));
+                    tv_title.setText(item.getTitle());
                     // 设置作者
                     String author = item.getAuthor().isEmpty() ? item.getShareUser() : item.getAuthor();
                     tv_author.setText("作者: " + author);

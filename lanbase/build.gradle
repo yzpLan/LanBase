@@ -48,7 +48,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'com.github.yzpLan'
-                artifactId = 'lanbase'
+                artifactId = 'LanBase'
                 version = '1.1.3'
             }
         }
@@ -57,12 +57,9 @@ afterEvaluate {
 
 dependencies {
     // Android 基础
-    api 'androidx.appcompat:appcompat:1.4.2'
-    api 'com.google.android.material:material:1.6.1'
-    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-
-    // 本地文件包(时间/滚轮选择器)
-    api fileTree(dir: 'libs', include: ['*.aar'])
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // 网络请求核心 (Retrofit + Gson + RxJava)
     api 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -71,19 +68,18 @@ dependencies {
     api 'io.reactivex.rxjava2:rxjava:2.2.21'
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     api 'com.google.code.gson:gson:2.9.0'
-    api 'com.squareup.okhttp3:logging-interceptor:4.10.0'
-    api 'com.squareup.okio:okio:3.4.0'
+    implementation  'com.squareup.okio:okio:3.4.0'
 
     // 智能刷新框架
-    api 'androidx.recyclerview:recyclerview:1.2.1'
-    api 'io.github.scwang90:refresh-layout-kernel:2.1.0'
-    api 'io.github.scwang90:refresh-header-classics:2.1.0'
-    api 'io.github.scwang90:refresh-footer-classics:2.1.0'
+    implementation  'androidx.recyclerview:recyclerview:1.2.1'
+    implementation  'io.github.scwang90:refresh-layout-kernel:2.1.0'
+    implementation  'io.github.scwang90:refresh-header-classics:2.1.0'
+    implementation  'io.github.scwang90:refresh-footer-classics:2.1.0'
 
     // 业务工具
-    api 'com.guolindev.permissionx:permissionx:1.6.4'
-    api 'com.orhanobut:logger:2.2.0'
-    api 'com.github.bumptech.glide:glide:4.12.0'
-    api 'com.google.zxing:core:3.5.2'
-    api 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation  'com.guolindev.permissionx:permissionx:1.6.4'
+    implementation  'com.orhanobut:logger:2.2.0'
+    implementation  'com.github.bumptech.glide:glide:4.12.0'
+    implementation  'com.google.zxing:core:3.5.2'
+    implementation  'com.contrarywind:Android-PickerView:4.1.9'
 }

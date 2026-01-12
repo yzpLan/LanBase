@@ -31,3 +31,4 @@
 -dontwarn io.reactivex.**
 -dontwarn okhttp3.**
 -dontwarn com.yzplan.lanbase.**
+-dontwarn com.contrarywind.**
