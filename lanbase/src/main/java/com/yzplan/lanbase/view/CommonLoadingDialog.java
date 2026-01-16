@@ -1,28 +1,25 @@
 package com.yzplan.lanbase.view;
 
-import android.os.Bundle;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.yzplan.lanbase.R;
 
-
 /**
  * 通用加载/状态弹窗
+ * 修改点：由 DialogFragment 改为 Dialog 方案，移除对 FragmentManager 的依赖
  */
-public class CommonLoadingDialog extends DialogFragment {
+public class CommonLoadingDialog extends Dialog {
     //状态枚举
     public enum Status {
         LOADING,
@@ -41,39 +38,34 @@ public class CommonLoadingDialog extends DialogFragment {
     private String mMessage = "加载中...";
     // 消失后的回调
     private Runnable mDismissCallback;
-    private boolean mIsShowing = false;
+
     // 超时任务
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final Runnable mFailsafeRunnable = () -> {
-        if (isAdded() && mCurrentStatus == Status.LOADING) {
-            dismissAllowingStateLoss();
+        if (isShowing() && mCurrentStatus == Status.LOADING) {
+            dismiss();
             if (mDismissCallback != null) {
                 mDismissCallback.run();
             }
         }
     };
 
-    public CommonLoadingDialog() {
-    }
+    /**
+     * 构造函数
+     * @param context 建议传入 Activity 上下文
+     */
+    public CommonLoadingDialog(@NonNull Context context) {
+        // 使用自定义样式
+        super(context, R.style.CommonLoadingDialog);
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.CommonLoadingDialog);
-        mRotateAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.lib_loading_rotate);
-    }
+        // 初始化布局
+        View view = LayoutInflater.from(context).inflate(R.layout.lib_common_loading_dialog, null);
+        setContentView(view);
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.lib_common_loading_dialog, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         mStatusImage = view.findViewById(R.id.iv_status);
         mMessageText = view.findViewById(R.id.tv_message);
+        mRotateAnimation = AnimationUtils.loadAnimation(context, R.anim.lib_loading_rotate);
+
         setCancelable(false);
         updateUI();
     }
@@ -112,7 +104,7 @@ public class CommonLoadingDialog extends DialogFragment {
                 if (mStatusImage != null) {
                     mStatusImage.setVisibility(View.VISIBLE);
                     // 加载图标
-                    mStatusImage.setImageResource(R.drawable.lib_icon_processing);
+                    mStatusImage.setImageResource(R.id.iv_status);
                     mStatusImage.startAnimation(mRotateAnimation);
                 }
                 // 启动超时保护
@@ -122,14 +114,14 @@ public class CommonLoadingDialog extends DialogFragment {
                 stopAnimation();
                 if (mStatusImage != null) {
                     // 成功图标
-                    mStatusImage.setImageResource(R.drawable.lib_icon_success);
+                    mStatusImage.setImageResource(R.id.iv_status);
                 }
                 autoDismiss();
                 break;
             case ERROR:
                 stopAnimation();
                 if (mStatusImage != null) {
-                    mStatusImage.setImageResource(R.drawable.lib_icon_error); // 失败图标
+                    mStatusImage.setImageResource(R.id.iv_status); // 失败图标
                 }
                 autoDismiss();
                 break;
@@ -148,8 +140,8 @@ public class CommonLoadingDialog extends DialogFragment {
      */
     private void autoDismiss() {
         mHandler.postDelayed(() -> {
-            if (isAdded() || isVisible()) {
-                dismissAllowingStateLoss();
+            if (isShowing()) {
+                dismiss();
             }
             // 执行回调 (例如跳转)
             if (mDismissCallback != null) {
@@ -158,32 +150,13 @@ public class CommonLoadingDialog extends DialogFragment {
         }, AUTO_DISMISS_DELAY_MS);
     }
 
-    public void show(@NonNull FragmentManager manager, String tag) {
-        if (mIsShowing || isAdded()) {
-            return;
-        }
-        try {
-            mIsShowing = true;
-            super.show(manager, tag);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void dismiss() {
-        mIsShowing = false;
         // 移除所有未执行的回调，防止内存泄漏
         mHandler.removeCallbacksAndMessages(null);
-        super.dismiss();
-    }
-
-    @Override
-    public void onDestroyView() {
         if (mStatusImage != null) {
             mStatusImage.clearAnimation();
         }
-        mHandler.removeCallbacksAndMessages(null);
-        super.onDestroyView();
+        super.dismiss();
     }
 }

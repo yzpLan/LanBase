@@ -1,10 +1,7 @@
 package com.yzplan.lanbase.manager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
+import android.app.Activity;
 import com.yzplan.lanbase.view.CommonLoadingDialog;
-
 
 /**
  * Loading 弹窗管理助手
@@ -13,9 +10,9 @@ import com.yzplan.lanbase.view.CommonLoadingDialog;
 public class LoadingHelper {
 
     private CommonLoadingDialog mLoadingDialog;
-    private final AppCompatActivity activity;
+    private final Activity activity;
 
-    public LoadingHelper(AppCompatActivity activity) {
+    public LoadingHelper(Activity activity) {
         this.activity = activity;
     }
 
@@ -32,10 +29,8 @@ public class LoadingHelper {
     }
 
     public void dismiss() {
-        if (mLoadingDialog != null) {
-            if (mLoadingDialog.isAdded() || mLoadingDialog.isVisible()) {
-                mLoadingDialog.dismissAllowingStateLoss();
-            }
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
             mLoadingDialog = null;
         }
     }
@@ -43,16 +38,15 @@ public class LoadingHelper {
     private void showDialog(CommonLoadingDialog.Status status, String message, Runnable onDismiss) {
         if (activity == null || activity.isFinishing() || activity.isDestroyed()) return;
 
-        if (mLoadingDialog != null && mLoadingDialog.isVisible() && mLoadingDialog.isAdded()) {
-            // 复用
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            // 复用并更新状态
             mLoadingDialog.setState(status, message, onDismiss);
         } else {
-            // 新建
-            mLoadingDialog = new CommonLoadingDialog();
+            // 新建并显示
+            mLoadingDialog = new CommonLoadingDialog(activity);
             mLoadingDialog.setState(status, message, onDismiss);
             try {
-                FragmentManager fm = activity.getSupportFragmentManager();
-                mLoadingDialog.show(fm, "loading_helper_dialog");
+                mLoadingDialog.show();
             } catch (Exception e) {
                 e.printStackTrace();
             }

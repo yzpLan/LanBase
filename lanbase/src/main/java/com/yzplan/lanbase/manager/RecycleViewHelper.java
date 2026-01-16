@@ -47,6 +47,7 @@ public class RecycleViewHelper<T> {
     private int pageNo = 1;
     private int startPageNo = 1;
     private int pageSize = 10;
+    private boolean mEnableRefresh = true; // 默认开启刷新
     private View emptyView;
 
     // --- 回调接口 ---
@@ -135,6 +136,17 @@ public class RecycleViewHelper<T> {
     }
 
     /**
+     * [可选] 禁用下拉刷新和上拉加载，仅作为普通列表使用
+     */
+    public RecycleViewHelper<T> setPureListMode() {
+        this.mEnableRefresh = false;
+        this.refreshLayout.setEnableRefresh(false);      // 禁用下拉手势
+        this.refreshLayout.setEnableLoadMore(false);     // 禁用上拉手势
+        this.refreshLayout.setEnableOverScrollDrag(false); // 禁用越界回弹效果
+        return this;
+    }
+
+    /**
      * [可选] 设置缺省页 (空数据时显示的 View)
      */
     public RecycleViewHelper<T> setEmptyView(View emptyView) {
@@ -176,7 +188,12 @@ public class RecycleViewHelper<T> {
         if (loader == null) {
             throw new RuntimeException("RecycleViewHelper 报错：请先调用 .setData() 设置加载逻辑！");
         }
-        refreshLayout.autoRefresh(); // 触发自动刷新
+        if (mEnableRefresh) {
+            refreshLayout.autoRefresh(); // 正常模式：触发自动刷新动画
+        } else {
+            // 纯列表模式：不显示动画，直接静默加载第一页数据
+            loader.load(startPageNo, pageSize);
+        }
         return this;
     }
 
