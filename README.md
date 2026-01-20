@@ -427,7 +427,7 @@ private RecycleViewHelper<OrderRespDTO> recycleViewHelper;
  * R.layout.lib_item_order:列表item 
  */
 private void initRecycle() {
-    recycleViewHelper = new RecycleViewHelper<OrderRespDTO>(binding.listView)
+    recycleViewHelper = new RecycleViewHelper<OrderRespDTO>(LibLayoutCommonListBinding.bind(binding.listView))
             .setLayout(R.layout.lib_item_order, (holder, item, position) -> {
                 holder.getView(R.id.tv_title).setText(item.getTitle());
             })

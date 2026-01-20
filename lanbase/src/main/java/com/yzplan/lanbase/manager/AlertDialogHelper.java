@@ -6,7 +6,6 @@ import android.view.View;
 import com.yzplan.lanbase.utils.data.StringUtils;
 import com.yzplan.lanbase.view.CommonAlertDialog;
 
-
 /**
  * 通用对话框构建工具类
  * 逻辑层级：[双按钮标准] -> [双按钮带颜色] -> [单按钮] -> [倒计时系列] -> [全自定义]
@@ -21,14 +20,14 @@ public class AlertDialogHelper {
      * 默认询问：取消/确定 (默认颜色)
      */
     public static void showConfirm(Context context, String title, String content, View.OnClickListener onConfirm) {
-        showCustom(context, title, content, null, 0, "取消", 0, "确定", 0, null, onConfirm);
+        showBuilder(context, title, content, null, 0, "取消", 0, "确定", 0, null, onConfirm, false, 0, true);
     }
 
     /**
      * 警告询问：取消/确定 (右侧按钮变红)
      */
     public static void showConfirm(Context context, String title, String content, int redColor, View.OnClickListener onConfirm) {
-        showCustom(context, title, content, null, 0, "取消", 0, "确定", redColor, null, onConfirm);
+        showBuilder(context, title, content, null, 0, "取消", 0, "确定", redColor, null, onConfirm, false, 0, true);
     }
 
     // ==========================================
@@ -39,21 +38,21 @@ public class AlertDialogHelper {
      * 单按钮：知道了 (默认颜色)
      */
     public static void showSingleAlert(Context context, String title, String content, String btnText, View.OnClickListener onConfirm) {
-        showBuilder(context, title, content, null, 0, btnText, 0, null, 0, null, onConfirm, true, 0, true);
+        showBuilder(context, title, content, null, 0, null, 0, btnText, 0, null, onConfirm, true, 0, true);
     }
 
     /**
      * 单按钮：带颜色
      */
     public static void showSingleAlert(Context context, String title, String content, String btnText, int btnColor, View.OnClickListener onConfirm) {
-        showBuilder(context, title, content, null, 0, btnText, btnColor, null, 0, null, onConfirm, true, 0, true);
+        showBuilder(context, title, content, null, 0, null, 0, btnText, btnColor, null, onConfirm, true, 0, true);
     }
 
     /**
      * 单按钮：倒计时自动消失/确认
      */
     public static void showSingleCountDown(Context context, String title, String content, String btnText, int btnColor, int seconds, View.OnClickListener onConfirm) {
-        showBuilder(context, title, content, null, 0, btnText, btnColor, null, 0, null, onConfirm, true, seconds, true);
+        showBuilder(context, title, content, null, 0, null, 0, btnText, btnColor, null, onConfirm, true, seconds, true);
     }
 
     // ==========================================
@@ -75,7 +74,7 @@ public class AlertDialogHelper {
     }
 
     // ==========================================
-    // 4. [全场景] 完全自定义组合 (核心罗列)
+    // 4. [全场景] 完全自定义组合
     // ==========================================
 
     /**
@@ -98,7 +97,7 @@ public class AlertDialogHelper {
     }
 
     // ==========================================
-    // 5. 核心构建 Builder (所有方法最终汇聚于此)
+    // 5. 核心构建 Builder (修复文字覆盖逻辑)
     // ==========================================
 
     private static void showBuilder(Context context, String title, String content, String tip, int tipColor,
@@ -110,8 +109,13 @@ public class AlertDialogHelper {
         dialog.setTitle(title).setContent(content).setTip(tip, tipColor)
                 .setSingleMode(isSingleMode).setCountDown(countDownSeconds, isCountDownOnRight);
 
-        String lText = StringUtils.isNullOrEmpty(leftText) ? "取消" : leftText;
-        dialog.setLeftBtn(lText, leftColor, leftListener);
+        // 核心修正：
+        // 1. 如果是单按钮模式，左侧文本不设置
+        // 2. 如果右侧/左侧传入了文字，则优先使用传入值；否则才给“取消/确定”的兜底文案
+        if (!isSingleMode) {
+            String lText = StringUtils.isNullOrEmpty(leftText) ? "取消" : leftText;
+            dialog.setLeftBtn(lText, leftColor, leftListener);
+        }
 
         String rText = StringUtils.isNullOrEmpty(rightText) ? "确定" : rightText;
         dialog.setRightBtn(rText, rightColor, rightListener);

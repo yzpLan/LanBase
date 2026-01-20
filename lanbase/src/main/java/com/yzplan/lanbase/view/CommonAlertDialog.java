@@ -12,10 +12,8 @@ import androidx.annotation.NonNull;
 
 import com.yzplan.lanbase.R;
 
-
 /**
  * 通用提示/确认 Dialog
- * 支持：标题/内容/Tip/按钮的颜色自定义、单双按钮切换、倒计时功能
  */
 public class CommonAlertDialog extends Dialog {
 
@@ -42,7 +40,7 @@ public class CommonAlertDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lib_common_alert_dialog);
-        setCancelable(false);
+        setCancelable(false); // 默认不响应点击外部取消
 
         if (getWindow() != null) {
             getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -70,7 +68,7 @@ public class CommonAlertDialog extends Dialog {
         setTextOrHide(txtTip, tip);
         if (tipColor != 0 && txtTip != null) txtTip.setTextColor(tipColor);
 
-        // 按钮文本及颜色
+        // 按钮文本及颜色处理
         if (txtCancel != null) {
             txtCancel.setText(leftText);
             if (leftColor != 0) txtCancel.setTextColor(leftColor);
@@ -80,12 +78,13 @@ public class CommonAlertDialog extends Dialog {
             if (rightColor != 0) txtSure.setTextColor(rightColor);
         }
 
-        // 模式切换
+        // 模式切换逻辑优化
         if (isSingleMode) {
             if (txtCancel != null) txtCancel.setVisibility(View.GONE);
             if (ivLine != null) ivLine.setVisibility(View.GONE);
             if (txtSure != null) {
                 txtSure.setVisibility(View.VISIBLE);
+                // 单按钮模式下，背景设为全底部圆角
                 txtSure.setBackgroundResource(R.drawable.lib_selector_white_bottom_radius6);
             }
         } else {
@@ -100,6 +99,7 @@ public class CommonAlertDialog extends Dialog {
             }
         }
 
+        // 启动倒计时
         if (countDownSeconds > 0) startCountDown();
     }
 
@@ -135,7 +135,7 @@ public class CommonAlertDialog extends Dialog {
             public void onFinish() {
                 if (targetBtn != null && targetBtn.isShown()) {
                     targetBtn.setText(originalText);
-                    targetBtn.performClick();
+                    targetBtn.performClick(); // 到期自动点击按钮
                 }
             }
         }.start();
@@ -143,11 +143,15 @@ public class CommonAlertDialog extends Dialog {
 
     @Override
     public void dismiss() {
-        if (timer != null) timer.cancel();
+        // 安全退出：防止 Handler 定时任务导致内存泄露
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
         super.dismiss();
     }
 
-    // --- Setters ---
+    // --- 链式 Setters 保持 ---
     public CommonAlertDialog setTitle(String title) {
         this.title = title;
         return this;
@@ -162,10 +166,6 @@ public class CommonAlertDialog extends Dialog {
         this.tip = tip;
         this.tipColor = color;
         return this;
-    }
-
-    public CommonAlertDialog setTip(String tip) {
-        return setTip(tip, 0);
     }
 
     public CommonAlertDialog setSingleMode(boolean isSingle) {
@@ -190,6 +190,9 @@ public class CommonAlertDialog extends Dialog {
         this.isCountDownOnRight = isOnRight;
     }
 
+    /**
+     * 防错文本展示：处理 "null" 字符串和空数据隐藏
+     */
     private void setTextOrHide(TextView tv, String text) {
         if (tv == null) return;
         if (TextUtils.isEmpty(text) || "null".equalsIgnoreCase(text)) {
