@@ -72,8 +72,21 @@ public class LogFileUtils {
      * 核心写入逻辑
      */
     private static void performWrite(String tag, String msg) {
+        if (sLogDirPath == null) return;
+        // --- 增加自动修复逻辑 ---
+        File dir = new File(sLogDirPath);
+        if (!dir.exists()) {
+            boolean success = dir.mkdirs();
+            if (!success) {
+                // 如果创建失败（比如权限依然没拿到），直接返回，避免触发异常
+                return;
+            }
+        }
+        // -----------------------
         String fileName = fileNameFormat.format(new Date()) + ".log";
         File logFile = new File(sLogDirPath, fileName);
+
+        // 使用 true 参数代表追加写入
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true))) {
             String content = String.format("%s [%s]: %s\n", logTimeFormat.format(new Date()), tag, msg);
             writer.write(content);
