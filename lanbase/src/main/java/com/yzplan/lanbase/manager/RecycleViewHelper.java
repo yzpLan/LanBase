@@ -234,6 +234,34 @@ public class RecycleViewHelper<T> {
         }
     }
 
+    /**
+     * 移动指定位置的 Item (通常用于拖拽排序后的 UI 同步)
+     */
+    public void notifyItemMoved(int fromPosition, int toPosition) {
+        if (fromPosition >= 0 && fromPosition < mData.size()
+                && toPosition >= 0 && toPosition < mData.size()) {
+            adapter.notifyItemMoved(fromPosition, toPosition);
+        }
+    }
+
+    /**
+     * 获取指定位置的数据
+     */
+    public T getItem(int position) {
+        if (position >= 0 && position < mData.size()) {
+            return mData.get(position);
+        }
+        return null;
+    }
+
+    /**
+     * 获取内部适配器
+     * 用于 ItemTouchHelper 等需要原生 Adapter 对象的场景
+     */
+    public RecyclerView.Adapter<BaseViewHolder> getAdapter() {
+        return adapter;
+    }
+
     // ================== 数据处理与回调 ==================
 
     /**
