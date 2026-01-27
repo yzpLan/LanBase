@@ -52,6 +52,7 @@ public class CommonLoadingDialog extends Dialog {
 
     /**
      * 构造函数
+     *
      * @param context 建议传入 Activity 上下文
      */
     public CommonLoadingDialog(@NonNull Context context) {
@@ -104,7 +105,7 @@ public class CommonLoadingDialog extends Dialog {
                 if (mStatusImage != null) {
                     mStatusImage.setVisibility(View.VISIBLE);
                     // 加载图标
-                    mStatusImage.setImageResource(R.id.iv_status);
+                    mStatusImage.setImageResource(R.drawable.lib_icon_processing);
                     mStatusImage.startAnimation(mRotateAnimation);
                 }
                 // 启动超时保护
@@ -114,14 +115,15 @@ public class CommonLoadingDialog extends Dialog {
                 stopAnimation();
                 if (mStatusImage != null) {
                     // 成功图标
-                    mStatusImage.setImageResource(R.id.iv_status);
+                    mStatusImage.setImageResource(R.drawable.lib_icon_success);
                 }
                 autoDismiss();
                 break;
             case ERROR:
                 stopAnimation();
                 if (mStatusImage != null) {
-                    mStatusImage.setImageResource(R.id.iv_status); // 失败图标
+                    // 失败图标
+                    mStatusImage.setImageResource(R.drawable.lib_icon_error);
                 }
                 autoDismiss();
                 break;

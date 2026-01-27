@@ -25,13 +25,12 @@ public class LoginInterceptor implements IInterceptor {
     @Override
     public void process(Postcard postcard, InterceptorCallback callback) {
         String path = postcard.getPath();
-//        if (!ARouterPath.LoginActivity.equals(path) && !LoginManager.getInstance().isLogin()) {
-//            L.e("用户未登录");
-//            callback.onInterrupt(new RuntimeException("用户未登录，访问受限"));
-//            ARouter.getInstance().build(ARouterPath.LoginActivity).navigation();
-//        } else {
-//            callback.onContinue(postcard);
-//        }
-        callback.onContinue(postcard);
+        if (!ARouterPath.LoginActivity.equals(path) && !LoginManager.getInstance().isLogin()) {
+            L.e("用户未登录");
+            callback.onInterrupt(new RuntimeException("用户未登录，访问受限"));
+            ARouter.getInstance().build(ARouterPath.LoginActivity).navigation();
+        } else {
+            callback.onContinue(postcard);
+        }
     }
 }
