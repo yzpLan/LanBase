@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/dp16">
+    >
 
     <Button
         android:id="@+id/btn_article_list"
@@ -37,12 +37,15 @@
         android:layout_marginTop="@dimen/dp16" />
 
     <com.yzplan.lanbase.view.SettingItemView
+        android:id="@+id/set_jifen"
+        android:paddingHorizontal="@dimen/dp16"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         app:siv_right_text="1784"
         app:siv_title="我的积分" />
 
-    <View style="@style/LineHorizontal" />
+    <View style="@style/LineHorizontal"
+        />
 
     <com.yzplan.lanbase.view.SettingItemView
         android:layout_width="match_parent"

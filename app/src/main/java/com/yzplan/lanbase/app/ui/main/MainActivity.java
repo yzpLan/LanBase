@@ -54,5 +54,13 @@ public class MainActivity extends AppBaseActivity<ActivityMainBinding, BasePrese
                 toast("测试功能");
             }
         });
+
+        binding.setJifen.setOnClickListener(new SingleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+
+            }
+        });
+
     }
 }

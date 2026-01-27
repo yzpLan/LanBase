@@ -16,6 +16,7 @@ import com.yzplan.lanbase.R;
 
 public class SettingItemView extends LinearLayout {
 
+    private LinearLayout llRoot;
     private ImageView ivIcon;
     private TextView tvTitle;
     private TextView tvRightText;
@@ -27,22 +28,44 @@ public class SettingItemView extends LinearLayout {
         super(context, attrs, defStyleAttr);
         initView(context);
         initAttrs(context, attrs);
+        transferPadding();
     }
 
     private void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.lib_widget_setting_item, this, true);
+        llRoot = findViewById(R.id.ll_root);
         ivIcon = findViewById(R.id.iv_icon);
         tvTitle = findViewById(R.id.tv_title);
         tvRightText = findViewById(R.id.tv_right_text);
         ivArrow = findViewById(R.id.iv_arrow);
+
+        // 必须去掉自身的背景，否则会有两层点击效果或截断效果
+        super.setBackgroundResource(0);
+    }
+
+    private void transferPadding() {
+        // 获取外部 XML 设置给 SettingItemView 的 padding
+        int pL = getPaddingLeft();
+        int pT = getPaddingTop();
+        int pR = getPaddingRight();
+        int pB = getPaddingBottom();
+
+        // 如果设置了 padding，则转移
+        if (pL != 0 || pT != 0 || pR != 0 || pB != 0) {
+            if (llRoot != null) {
+                llRoot.setPadding(pL, pT, pR, pB);
+            }
+            // 自身清空，确保背景铺满
+            super.setPadding(0, 0, 0, 0);
+        }
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingItemView);
 
-        // --- 1. 图标内容与大小 ---
+        // 1. 图标内容与大小
         int iconResId = ta.getResourceId(R.styleable.SettingItemView_siv_icon, 0);
-        int iconSize = ta.getDimensionPixelSize(R.styleable.SettingItemView_siv_icon_size, dp2px(20));
+        int iconSize = ta.getDimensionPixelSize(R.styleable.SettingItemView_siv_icon_size, dp2px(18));
         if (iconResId != 0) {
             ivIcon.setVisibility(VISIBLE);
             ivIcon.setImageResource(iconResId);
@@ -51,29 +74,24 @@ public class SettingItemView extends LinearLayout {
             ivIcon.setVisibility(GONE);
         }
 
-        // --- 2. 标题内容、大小、颜色 ---
+        // 2. 标题内容与样式
         tvTitle.setText(ta.getString(R.styleable.SettingItemView_siv_title));
         int titleSize = ta.getDimensionPixelSize(R.styleable.SettingItemView_siv_title_size, sp2px(16));
         tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
         tvTitle.setTextColor(ta.getColor(R.styleable.SettingItemView_siv_title_color, Color.parseColor("#333333")));
 
-        // --- 3. 右侧文字内容、大小、颜色 ---
+        // 3. 右侧文字内容与样式
         tvRightText.setText(ta.getString(R.styleable.SettingItemView_siv_right_text));
         int rtSize = ta.getDimensionPixelSize(R.styleable.SettingItemView_siv_right_text_size, sp2px(14));
         tvRightText.setTextSize(TypedValue.COMPLEX_UNIT_PX, rtSize);
         tvRightText.setTextColor(ta.getColor(R.styleable.SettingItemView_siv_right_text_color, Color.parseColor("#999999")));
 
-        // --- 4. 箭头大小、颜色、与文字间距 ---
+        // 4. 箭头控制
         boolean showArrow = ta.getBoolean(R.styleable.SettingItemView_siv_show_arrow, true);
         ivArrow.setVisibility(showArrow ? VISIBLE : GONE);
         int arrowSize = ta.getDimensionPixelSize(R.styleable.SettingItemView_siv_arrow_size, dp2px(16));
         updateViewSize(ivArrow, arrowSize, arrowSize);
         ivArrow.setColorFilter(ta.getColor(R.styleable.SettingItemView_siv_arrow_color, Color.parseColor("#CCCCCC")));
-
-        int arrowMargin = ta.getDimensionPixelSize(R.styleable.SettingItemView_siv_arrow_margin_start, dp2px(8));
-        MarginLayoutParams arrowParams = (MarginLayoutParams) ivArrow.getLayoutParams();
-        arrowParams.setMarginStart(arrowMargin);
-        ivArrow.setLayoutParams(arrowParams);
 
         ta.recycle();
     }
@@ -155,7 +173,9 @@ public class SettingItemView extends LinearLayout {
 
     // --- 点击事件 ---
     public SettingItemView setOnItemClickListener(OnClickListener listener) {
-        this.setOnClickListener(listener);
+        if (llRoot != null) {
+            llRoot.setOnClickListener(listener);
+        }
         return this;
     }
 }
