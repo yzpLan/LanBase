@@ -35,6 +35,7 @@
         <attr name="siv_right_text_size" format="dimension" />
         <attr name="siv_right_text_color" format="color" />
 
+        <attr name="siv_show_arrow" format="boolean" />
         <attr name="siv_arrow_size" format="dimension" />
         <attr name="siv_arrow_color" format="color" />
         <attr name="siv_arrow_margin_start" format="dimension" />

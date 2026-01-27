@@ -64,6 +64,8 @@ public class SettingItemView extends LinearLayout {
         tvRightText.setTextColor(ta.getColor(R.styleable.SettingItemView_siv_right_text_color, Color.parseColor("#999999")));
 
         // --- 4. 箭头大小、颜色、与文字间距 ---
+        boolean showArrow = ta.getBoolean(R.styleable.SettingItemView_siv_show_arrow, true);
+        ivArrow.setVisibility(showArrow ? VISIBLE : GONE);
         int arrowSize = ta.getDimensionPixelSize(R.styleable.SettingItemView_siv_arrow_size, dp2px(16));
         updateViewSize(ivArrow, arrowSize, arrowSize);
         ivArrow.setColorFilter(ta.getColor(R.styleable.SettingItemView_siv_arrow_color, Color.parseColor("#CCCCCC")));
