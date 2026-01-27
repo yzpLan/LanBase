@@ -2,9 +2,12 @@ package com.yzplan.lanbase.manager;
 
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.yzplan.lanbase.BaseApp;
+import com.yzplan.lanbase.utils.log.L;
 import com.yzplan.lanbase.utils.log.LogFileUtils;
 
 import java.io.PrintWriter;
@@ -14,6 +17,7 @@ import java.io.StringWriter;
  * 基础崩溃捕捉器
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
+    private static final String TAG = "CrashHandler";
 
     private static CrashHandler sInstance;
     private Thread.UncaughtExceptionHandler mDefaultHandler;
@@ -48,6 +52,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 "\nSDK: " + Build.VERSION.SDK_INT +
                 "\nThread: " + t.getName() +
                 "\nStack:\n" + sw;
+        L.e(TAG, info);
+
+        Log.e(BaseApp.sLogTag, info);
 
         // 3. 调用 lib 层自身的同步写入方法
         LogFileUtils.writeLogSync("CRASH", info);
