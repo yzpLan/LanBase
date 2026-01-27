@@ -522,6 +522,7 @@ SettingItemView 是一个高度可定制的列表项控件，专为个人中心�
 | `app:siv_right_text`         | string    | 右侧描述文字内容    | 无       |
 | `app:siv_right_text_size`    | dimension | 右侧文字大小      | 14sp    |
 | `app:siv_right_text_color`   | color     | 右侧文字颜色      | #999999 |
+| `app:siv_show_arrow`         | boolean   | 右侧箭头是否展示    | true    |
 | `app:siv_arrow_size`         | dimension | 右侧箭头宽高尺寸    | 16dp    |
 | `app:siv_arrow_color`        | color     | 箭头着色 (Tint) | #CCCCCC |
 | `app:siv_arrow_margin_start` | dimension | 箭头与右侧文字的间距  | 8dp     |
