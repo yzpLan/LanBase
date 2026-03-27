@@ -48,6 +48,7 @@ dependencies {
 因为项目使用`PickerView`,下载依赖需要在项目根目录gradle中添加阿里镜像:
 ```groovy
 maven { url 'https://maven.aliyun.com/repository/public' }
+maven { url 'https://jitpack.io' }
 ```
 由于本库引用了部分较老的第三方 UI 库，为了确保依赖树能够正确转换并避免 Duplicate class 冲突，
 请务必在项目根目录的 gradle.properties 文件中添加以下配置：
