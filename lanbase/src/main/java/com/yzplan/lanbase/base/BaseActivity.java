@@ -135,6 +135,11 @@ public abstract class BaseActivity<VB extends ViewBinding, P extends BasePresent
     }
 
     @Override
+    public void showLoading(String message, boolean backCancelable, Runnable onBackPress) {
+        mLoadingHelper.showLoading(message, backCancelable, onBackPress);
+    }
+
+    @Override
     public void showSuccess(String message) {
         mLoadingHelper.showSuccess(message, null);
     }

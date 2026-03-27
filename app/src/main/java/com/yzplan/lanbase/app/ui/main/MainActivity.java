@@ -12,6 +12,7 @@ import com.yzplan.lanbase.app.manager.LoginManager;
 import com.yzplan.lanbase.base.BasePresenter;
 import com.yzplan.lanbase.manager.AlertDialogHelper;
 import com.yzplan.lanbase.manager.SingleClickListener;
+import com.yzplan.lanbase.utils.log.L;
 
 @Route(path = ARouterPath.MainActivity)
 public class MainActivity extends AppBaseActivity<ActivityMainBinding, BasePresenter> {
@@ -52,6 +53,13 @@ public class MainActivity extends AppBaseActivity<ActivityMainBinding, BasePrese
             @Override
             public void onSingleClick(View v) {
                 toast("测试功能");
+
+                showLoading("ceshi", true, new Runnable() {
+                    @Override
+                    public void run() {
+                        L.i("取消");
+                    }
+                });
             }
         });
 

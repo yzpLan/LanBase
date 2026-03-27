@@ -49,6 +49,8 @@ public class CommonLoadingDialog extends Dialog {
             }
         }
     };
+    private boolean mCancelableByBackPressed = false; // 默认返回键不消失
+    private Runnable mOnBackPressedCallback; // 返回键点击回调
 
     /**
      * 构造函数
@@ -67,8 +69,30 @@ public class CommonLoadingDialog extends Dialog {
         mMessageText = view.findViewById(R.id.tv_message);
         mRotateAnimation = AnimationUtils.loadAnimation(context, R.anim.lib_loading_rotate);
 
-        setCancelable(false);
+        // 核心设置：点击对话框外部不消失
+        setCanceledOnTouchOutside(false);
+        // 默认不允许返回键关闭
+        setCancelable(mCancelableByBackPressed);
         updateUI();
+    }
+
+    /**
+     * 设置是否允许通过返回键关闭，并设置回调
+     */
+    public void setBackPressedCancelable(boolean cancelable, Runnable onBackPressed) {
+        this.mCancelableByBackPressed = cancelable;
+        this.mOnBackPressedCallback = onBackPressed;
+        setCancelable(cancelable); // Dialog 的 setCancelable 控制物理返回键
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mCancelableByBackPressed) {
+            super.onBackPressed();
+            if (mOnBackPressedCallback != null) {
+                mOnBackPressedCallback.run();
+            }
+        }
     }
 
     /**

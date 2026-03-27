@@ -16,6 +16,13 @@ public class LoadingHelper {
         this.activity = activity;
     }
 
+    public void showLoading(String message, boolean backCancelable, Runnable onBackPress) {
+        showDialog(CommonLoadingDialog.Status.LOADING, message, null);
+        if (mLoadingDialog != null) {
+            mLoadingDialog.setBackPressedCancelable(backCancelable, onBackPress);
+        }
+    }
+
     public void showLoading(String message, Runnable onDismiss) {
         showDialog(CommonLoadingDialog.Status.LOADING, message, onDismiss);
     }

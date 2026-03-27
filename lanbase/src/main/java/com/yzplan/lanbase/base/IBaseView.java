@@ -8,6 +8,8 @@ public interface IBaseView {
 
     void showLoading(String message, Runnable onDismiss);
 
+    void showLoading(String message,boolean backCancelable, Runnable onDismiss);
+
     void hideLoading();
 
     void showError(String errorMsg);
